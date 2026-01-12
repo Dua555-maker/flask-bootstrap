@@ -19,7 +19,7 @@ def all_cars():
     brand = request.form['brand']
     tmp_cars  = []
     for car in cars:
-      if brand in car['brand']:
+      if brand.casefold() in car['brand'].casefold():
         tmp_cars.append(car)
     return render_template('cars/all_cars.html', title='Search Cars Page',cars=tmp_cars)
   return render_template('cars/all_cars.html', title='Show All Cars Page',cars=cars)
