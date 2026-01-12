@@ -13,8 +13,15 @@ cars = [
 def index():
   return render_template('index.html', title='Home Page')
 
-@app.route('/cars')
+@app.route('/cars',methods=['GET','POST'])
 def all_cars():
+  if request.method == "POST":
+    brand = request.form['brand']
+    tmp_cars  = []
+    for car in cars:
+      if brand in car['brand']:
+        tmp_cars.append(car)
+    return render_template('cars/all_cars.html', title='Search Cars Page',cars=tmp_cars)
   return render_template('cars/all_cars.html', title='Show All Cars Page',cars=cars)
 
 @app.route('/cars/new',methods=['GET','POST'])
@@ -43,6 +50,25 @@ def delete_car(id):
   flash('Delete Car Successfully','success')
   return redirect(url_for('all_cars'))
 
-@app.route('/cars/<int:id>/edit')
+@app.route('/cars/<int:id>/edit',methods=['GET','POST'])
 def edit_car(id):
-  return render_template('cars/edit_car.html',title='Edit Car Page')
+  for c in cars:
+    if id == c['id']:
+      car = c
+      break
+  if request.method == 'POST':
+    brand = request.form['brand']
+    model = request.form['model']
+    year = int(request.form['year'])
+    price = int(request.form['price'])
+
+    for c in cars:
+      if id == c['id']:
+        c['brand'] = brand
+        c['model'] = model
+        c['year'] = year
+        c['price'] = price
+        break
+    flash('Update Car Successfully','success')
+    return redirect(url_for('all_cars'))
+  return render_template('cars/edit_car.html',title='Edit Car Page',car=car)

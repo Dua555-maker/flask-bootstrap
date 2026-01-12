@@ -14,23 +14,27 @@
       <div class="card-body">
         <form method="post">
           <div class="mb-3">
+            <label for="id" class="form-label">ID</label>
+            <input disabled type="number" class="form-control" id="id" name="id" value="{{car.id}}">
+          </div>
+          <div class="mb-3">
             <label for="brand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="brand" name="brand">
+            <input type="text" class="form-control" id="brand" name="brand" value="{{car.brand}}">
           </div>
           <div class="mb-3">
             <label for="model" class="form-label">Model</label>
-            <input type="text" class="form-control" id="model" name="model">
+            <input type="text" class="form-control" id="model" name="model" value="{{car.model}}">
           </div>
           <div class="mb-3">
             <label for="year" class="form-label">Year</label>
-            <input type="number" class="form-control" id="year" name="year">
+            <input type="number" class="form-control" id="year" name="year" value="{{car.year}}">
           </div>
           <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" name="price">
+            <input type="number" class="form-control" id="price" name="price" value="{{car.price}}">
           </div>
-          <button type="submit" class="btn btn-success"><i class="bi bi-floppy2-fill"></i>
-            Edit Car</button>
+          <button type="submit" class="btn btn-success"><i class="bi bi-pencil-square"></i>
+            Update Car</button>
         </form>
       </div>
   </div>
